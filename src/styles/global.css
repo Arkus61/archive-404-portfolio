@@ -43,7 +43,7 @@ body {
   background-color: var(--paper);
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.45;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -53,7 +53,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   content: "";
-  opacity: 0.2;
+  opacity: 0.1;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
 }
@@ -175,14 +175,14 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.35rem, 2.2vw, 2.65rem);
+  gap: clamp(0.85rem, 1.55vw, 1.5rem);
 }
 
 .desktop-nav a {
   position: relative;
   display: block;
   padding: 0.5rem 0;
-  font-size: 0.67rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.015em;
   text-decoration: none;
@@ -205,6 +205,24 @@ ol {
 .desktop-nav a:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.desktop-nav li:last-child a {
+  padding: 0.62rem 0.85rem;
+  color: var(--paper);
+  background: var(--orange);
+  border: 1px solid var(--orange-dark);
+  box-shadow: 0.14rem 0.16rem 0 var(--shadow);
+}
+
+.desktop-nav li:last-child a::after {
+  display: none;
+}
+
+.desktop-nav li:last-child a:hover,
+.desktop-nav li:last-child a:focus-visible {
+  color: var(--orange);
+  background: var(--paper);
 }
 
 .system-state {
@@ -744,6 +762,122 @@ ol {
   font-weight: 800;
 }
 
+/* Contact access */
+.contact-access__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 2.75rem) var(--content-pad);
+  background: linear-gradient(120deg, rgba(232, 223, 207, 0.5), transparent 65%);
+}
+
+.contact-access__message {
+  align-self: center;
+  max-width: 38rem;
+}
+
+.contact-access__label {
+  margin-bottom: 0.75rem;
+  color: var(--orange);
+  font-family: var(--font-condensed);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+
+.contact-access__message h3 {
+  max-width: 32rem;
+  font-family: var(--font-condensed);
+  font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.contact-access__message > p:last-child {
+  max-width: 29rem;
+  margin-top: 1rem;
+  color: var(--graphite-soft);
+  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
+  line-height: 1.55;
+}
+
+.contact-access__channels {
+  display: grid;
+  align-content: center;
+  gap: 0.75rem;
+}
+
+.contact-channel {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) 1.5rem;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 5.25rem;
+  padding: 0.8rem 1rem;
+  color: var(--graphite);
+  background: rgba(242, 236, 223, 0.86);
+  border: 1px solid var(--rule);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.contact-channel:hover,
+.contact-channel:focus-visible {
+  background: var(--paper);
+  border-color: var(--orange);
+  transform: translate(-0.12rem, -0.12rem);
+}
+
+.contact-channel__icon {
+  display: grid;
+  place-items: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  color: var(--teal);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.contact-channel__icon .technical-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.contact-channel__content {
+  display: grid;
+  min-width: 0;
+  gap: 0.16rem;
+  font-family: var(--font-condensed);
+}
+
+.contact-channel__content small {
+  color: var(--graphite-soft);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.contact-channel__content strong {
+  overflow: hidden;
+  font-size: clamp(0.92rem, 1.35vw, 1.1rem);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-channel__content > span {
+  color: var(--teal);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contact-channel > .technical-icon {
+  width: 1.25rem;
+  color: var(--orange);
+}
+
 /* Shared section system */
 .ruled-section {
   border-bottom: 1px solid var(--rule);
@@ -810,7 +944,7 @@ ol {
 }
 
 .section-heading h2 {
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   font-weight: 800;
   letter-spacing: 0.015em;
 }
@@ -1241,36 +1375,25 @@ ol {
 }
 
 .about-panel__body > p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.55;
 }
 
-.contact-list,
 .contact-archived {
   min-height: 12rem;
   padding: 1.35rem var(--content-pad);
-}
-
-.contact-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  min-height: 3rem;
-  border-bottom: 1px solid var(--rule-soft);
-}
-
-.contact-list .technical-icon {
-  width: 1.35rem;
-}
-
-.contact-list a {
-  font-size: 0.82rem;
 }
 
 .contact-archived {
   display: grid;
   align-content: center;
   font-family: var(--font-condensed);
+}
+
+.contact-access .contact-archived {
+  min-height: auto;
+  padding: 1rem;
+  border: 1px solid var(--rule);
 }
 
 .contact-archived__code {
@@ -1495,6 +1618,11 @@ ol {
     text-decoration: none;
   }
 
+  .mobile-nav li:last-child a {
+    color: var(--orange);
+    font-size: 0.8rem;
+  }
+
   .hero {
     grid-template-columns: minmax(0, 0.85fr) minmax(27rem, 1.15fr);
   }
@@ -1583,6 +1711,10 @@ ol {
   .process__steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.4rem 1rem;
+  }
+
+  .contact-access__body {
+    grid-template-columns: 1fr;
   }
 
   .process-step__connector {
@@ -1756,10 +1888,24 @@ ol {
     font-size: 2.5rem;
   }
 
-  .contact-list,
   .contact-archived {
     min-height: 11rem;
     padding-inline: 1rem;
+  }
+
+  .contact-access__body {
+    gap: 1.6rem;
+    padding-block: 1.4rem 1.6rem;
+  }
+
+  .contact-access__message h3 {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+
+  .contact-channel {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 1.25rem;
+    gap: 0.65rem;
+    padding-inline: 0.75rem;
   }
 }
 

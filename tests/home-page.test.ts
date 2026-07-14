@@ -11,12 +11,12 @@ import { siteData } from "../src/data/site";
 const workspaceRoot = fileURLToPath(new URL("../", import.meta.url));
 const expectedSectionOrder = [
   "hero",
+  "contact",
   "projects",
   "services",
   "technologies",
   "process",
   "about",
-  "contact",
 ] as const;
 const expectedNavTargets = [
   "#about",

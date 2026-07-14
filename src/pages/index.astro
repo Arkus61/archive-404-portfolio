@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 
 import AboutContact from "../components/AboutContact.astro";
 import Capabilities from "../components/Capabilities.astro";
+import ContactAccess from "../components/ContactAccess.astro";
 import Hero from "../components/Hero.astro";
 import Process from "../components/Process.astro";
 import ProjectArchive from "../components/ProjectArchive.astro";
@@ -22,6 +23,7 @@ const contactLinks = getContactLinks(siteData);
     secondaryCta={siteData.cta.secondary}
     role={siteData.role}
   />
+  <ContactAccess {contactLinks} />
   <ProjectArchive {projects} />
   <Capabilities services={siteData.services} technologies={siteData.technologies} />
   <Process />
@@ -29,6 +31,5 @@ const contactLinks = getContactLinks(siteData);
     name={siteData.name}
     role={siteData.role}
     description={siteData.description}
-    {contactLinks}
   />
 </BaseLayout>

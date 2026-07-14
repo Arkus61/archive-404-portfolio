@@ -1,62 +1,28 @@
 ---
-import type { ContactLink } from "../data/site";
-import TechnicalIcon from "./icons/TechnicalIcon.astro";
 
 interface Props {
   name: string;
   role: string;
   description: string;
-  contactLinks: ContactLink[];
 }
 
-const { name, role, description, contactLinks } = Astro.props;
+const { name, role, description } = Astro.props;
 ---
 
-<div class="about-contact-grid">
-  <section id="about" class="about-panel ruled-section" aria-labelledby="about-title">
-    <header class="section-heading section-heading--compact">
-      <span class="section-heading__marker section-heading__marker--teal" aria-hidden="true"></span>
-      <div>
-        <p class="section-heading__index">05 / ПРОФИЛЬ</p>
-        <h2 id="about-title">ОБО МНЕ</h2>
-      </div>
-    </header>
-    <div class="about-panel__body">
-      <span class="about-panel__monogram" aria-hidden="true">А</span>
-      <dl>
-        <div><dt>СПЕЦИАЛИСТ</dt><dd>{name}</dd></div>
-        <div><dt>РОЛЬ</dt><dd>{role}</dd></div>
-      </dl>
-      <p>{description}</p>
+<section id="about" class="about-panel ruled-section" aria-labelledby="about-title">
+  <header class="section-heading section-heading--compact">
+    <span class="section-heading__marker section-heading__marker--teal" aria-hidden="true"></span>
+    <div>
+      <p class="section-heading__index">06 / ПРОФИЛЬ</p>
+      <h2 id="about-title">ОБО МНЕ</h2>
     </div>
-  </section>
-
-  <section id="contact" class="contact-panel ruled-section" aria-labelledby="contact-title">
-    <header class="section-heading section-heading--compact">
-      <span class="section-heading__marker section-heading__marker--orange" aria-hidden="true"></span>
-      <div>
-        <p class="section-heading__index">06 / КАНАЛ</p>
-        <h2 id="contact-title">КОНТАКТЫ</h2>
-      </div>
-    </header>
-
-    {
-      contactLinks.length > 0 ? (
-        <ul class="contact-list">
-          {contactLinks.map((contact) => (
-            <li>
-              <TechnicalIcon name={contact.kind === "email" ? "mail" : "telegram"} />
-              <a href={contact.href}>{contact.label}</a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div class="contact-archived">
-          <span class="contact-archived__code">404 / OFFLINE</span>
-          <strong>КАНАЛЫ СВЯЗИ ЕЩЁ НЕ РАССЕКРЕЧЕНЫ</strong>
-          <p>Контактные данные появятся здесь после обновления архива.</p>
-        </div>
-      )
-    }
-  </section>
-</div>
+  </header>
+  <div class="about-panel__body">
+    <span class="about-panel__monogram" aria-hidden="true">А</span>
+    <dl>
+      <div><dt>СПЕЦИАЛИСТ</dt><dd>{name}</dd></div>
+      <div><dt>РОЛЬ</dt><dd>{role}</dd></div>
+    </dl>
+    <p>{description}</p>
+  </div>
+</section>

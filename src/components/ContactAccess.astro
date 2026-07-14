@@ -1,0 +1,57 @@
+---
+import type { ContactLink } from "../data/site";
+import TechnicalIcon from "./icons/TechnicalIcon.astro";
+
+interface Props {
+  contactLinks: ContactLink[];
+}
+
+const { contactLinks } = Astro.props;
+---
+
+<section id="contact" class="contact-access ruled-section" aria-labelledby="contact-title">
+  <header class="section-heading contact-access__heading">
+    <span class="section-heading__marker section-heading__marker--orange" aria-hidden="true"></span>
+    <div>
+      <p class="section-heading__index">01 / ПРЯМОЙ КАНАЛ</p>
+      <h2 id="contact-title">КОНТАКТЫ</h2>
+    </div>
+    <p class="section-heading__note">ОТКРЫТЫЙ КАНАЛ</p>
+  </header>
+
+  <div class="contact-access__body">
+    <div class="contact-access__message">
+      <p class="contact-access__label">ГОТОВЫ ОБСУДИТЬ ПРОЕКТ?</p>
+      <h3>Давайте соберём сайт, который работает на вас.</h3>
+      <p>Выберите удобный канал — отвечу и помогу превратить задачу в понятный план.</p>
+    </div>
+
+    {
+      contactLinks.length > 0 ? (
+        <ul class="contact-access__channels" aria-label="Способы связи">
+          {contactLinks.map((contact) => (
+            <li>
+              <a class="contact-channel" href={contact.href}>
+                <span class="contact-channel__icon" aria-hidden="true">
+                  <TechnicalIcon name={contact.kind === "email" ? "mail" : "telegram"} />
+                </span>
+                <span class="contact-channel__content">
+                  <small>{contact.kind === "email" ? "EMAIL" : "TELEGRAM"}</small>
+                  <strong>{contact.label}</strong>
+                  <span>Открыть канал</span>
+                </span>
+                <TechnicalIcon name="arrow" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="contact-archived">
+          <span class="contact-archived__code">404 / OFFLINE</span>
+          <strong>КАНАЛЫ СВЯЗИ ЕЩЁ НЕ РАССЕКРЕЧЕНЫ</strong>
+          <p>Контактные данные появятся здесь после обновления архива.</p>
+        </div>
+      )
+    }
+  </div>
+</section>
