@@ -1,0 +1,50 @@
+---
+interface Props {
+  side: "left" | "right";
+}
+
+const { side } = Astro.props;
+---
+
+<aside class:list={["archive-rail", `archive-rail--${side}`]} aria-hidden="true">
+  <span class="rail-crosshair"></span>
+  {
+    side === "left" ? (
+      <>
+        <div class="rail-block rail-block--top">
+          <small>ФОРМА</small>
+          <strong>КД–7</strong>
+        </div>
+        <p class="rail-vertical">DOC. A404 · 2026 · WEB</p>
+        <strong class="rail-index rail-index--teal">02</strong>
+        <div class="rail-block">
+          <small>ЛИСТ</small>
+          <strong>01 / 08</strong>
+        </div>
+        <div class="rail-block">
+          <small>КОД</small>
+          <strong>WEB DEV</strong>
+        </div>
+        <div class="rail-hatch"></div>
+        <p class="rail-caption">МИКРОФИЛЬМ<br />MF–404</p>
+      </>
+    ) : (
+      <>
+        <div class="rail-block rail-block--top">
+          <small>ХРАНЕНИЕ</small>
+          <strong>∞</strong>
+        </div>
+        <div class="rail-block">
+          <small>ИНДЕКС</small>
+          <strong class="rail-number">404</strong>
+        </div>
+        <svg class="rail-barcode" viewBox="0 0 34 180" focusable="false">
+          <path d="M2 2v176M6 2v176M10 2v176M12 2v176M17 2v176M20 2v176M25 2v176M27 2v176M32 2v176" />
+        </svg>
+        <p class="rail-vertical rail-vertical--right">A4042026WEB</p>
+        <div class="rail-seal">АРХИВ<br /><strong>№404</strong></div>
+      </>
+    )
+  }
+  <span class="rail-crosshair rail-crosshair--bottom"></span>
+</aside>

@@ -1,0 +1,25 @@
+---
+import ArchiveStatusPage from "../components/ArchiveStatusPage.astro";
+import { siteData } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeUrl } from "../lib/urls";
+---
+
+<BaseLayout
+  title={`Файл не найден — ${siteData.seo.title}`}
+  description="Запрошенный архивный файл не найден. Вернитесь в портфолио или откройте раздел контактов."
+  noindex
+  systemStatus="СИСТЕМА: ОШИБКА 404"
+  systemState="warning"
+>
+  <ArchiveStatusPage
+    code="ERROR / 404"
+    eyebrow="АРХИВНЫЙ ФАЙЛ ПОТЕРЯН"
+    title="ФАЙЛ НЕ НАЙДЕН"
+    description="Запись отсутствует в каталоге или была перемещена. Центральный архив остаётся доступен."
+    status="ПОИСК ЗАВЕРШЁН / ЗАПИСЬ НЕ ОБНАРУЖЕНА"
+    stamp="FILE LOST"
+    primaryAction={{ href: homeUrl(), label: "Вернуться в архив" }}
+    secondaryAction={{ href: homeUrl("contact"), label: "Связаться" }}
+  />
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import TechnicalIcon, { type TechnicalIconName } from "./icons/TechnicalIcon.astro";
+
+const steps: Array<{
+  label: string;
+  icon: TechnicalIconName;
+  description: string;
+}> = [
+  {
+    label: "IDEA",
+    icon: "idea",
+    description: "Уточняю задачу, аудиторию и формат проекта.",
+  },
+  {
+    label: "DESIGN",
+    icon: "design",
+    description: "Проектирую структуру и интерфейс будущего сайта.",
+  },
+  {
+    label: "CODE",
+    icon: "code",
+    description: "Собираю адаптивную статическую систему.",
+  },
+  {
+    label: "LAUNCH",
+    icon: "launch",
+    description: "Проверяю сборку и готовлю проект к запуску.",
+  },
+];
+---
+
+<section id="process" class="process ruled-section" aria-labelledby="process-title">
+  <header class="section-heading">
+    <span class="section-heading__marker section-heading__marker--orange" aria-hidden="true"></span>
+    <div>
+      <p class="section-heading__index">04 / МАРШРУТ</p>
+      <h2 id="process-title">ПРОЦЕСС РАБОТЫ</h2>
+    </div>
+    <p class="section-heading__note">IDEA → DESIGN → CODE → LAUNCH</p>
+  </header>
+
+  <ol class="process__steps">
+    {
+      steps.map((step, index) => (
+        <li class="process-step">
+          <span class="process-step__number">{String(index + 1).padStart(2, "0")}</span>
+          <span class="process-step__icon"><TechnicalIcon name={step.icon} /></span>
+          <div>
+            <h3>{step.label}</h3>
+            <p>{step.description}</p>
+          </div>
+          {index < steps.length - 1 && (
+            <span class="process-step__connector" aria-hidden="true">
+              <TechnicalIcon name="arrow" />
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</section>

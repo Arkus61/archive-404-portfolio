@@ -1,0 +1,50 @@
+---
+import Blueprint from "./Blueprint.astro";
+
+interface Props {
+  role: string;
+}
+
+const { role } = Astro.props;
+---
+
+<article class="dossier" aria-labelledby="dossier-title">
+  <header class="dossier__header">
+    <h2 id="dossier-title">ЛИЧНОЕ ДЕЛО СПЕЦИАЛИСТА</h2>
+    <span class="stamp stamp--approved">APPROVED</span>
+  </header>
+
+  <div class="dossier__body">
+    <dl class="dossier__fields">
+      <div>
+        <dt>№ СПЕЦИАЛИСТА</dt>
+        <dd class="dossier__serial">404-DEV-01</dd>
+      </div>
+      <div>
+        <dt>РОЛЬ</dt>
+        <dd>{role}</dd>
+      </div>
+      <div>
+        <dt>СПЕЦИАЛИЗАЦИЯ</dt>
+        <dd>ВЕБ-РАЗРАБОТКА<br />ПОД КЛЮЧ</dd>
+      </div>
+      <div>
+        <dt>ДОПУСК</dt>
+        <dd>WEB / STATIC</dd>
+      </div>
+      <div>
+        <dt>СТАТУС</dt>
+        <dd class="dossier__approved">APPROVED</dd>
+      </div>
+      <div>
+        <dt>ДОСЬЕ №</dt>
+        <dd class="dossier__number">000404</dd>
+      </div>
+    </dl>
+
+    <div class="dossier__blueprint">
+      <Blueprint />
+      <p><span>ПРИМЕЧАНИЕ:</span> Статическая архитектура, типизированный контент и аккуратная сборка.</p>
+    </div>
+  </div>
+</article>

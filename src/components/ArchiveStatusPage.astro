@@ -1,0 +1,407 @@
+---
+import TechnicalIcon from "./icons/TechnicalIcon.astro";
+
+interface Action {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  code: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  status: string;
+  stamp: string;
+  primaryAction: Action;
+  secondaryAction: Action;
+}
+
+const {
+  code,
+  eyebrow,
+  title,
+  description,
+  status,
+  stamp,
+  primaryAction,
+  secondaryAction,
+} = Astro.props;
+---
+
+<section class="archive-status" aria-labelledby="archive-status-title">
+  <div class="archive-status__telemetry" aria-hidden="true">
+    <span>SYS.LOG / A404</span>
+    <span>COORD. 55°45′N · 37°37′E</span>
+  </div>
+
+  <article class="archive-status__record">
+    <header class="archive-status__header">
+      <p>{code}</p>
+      <span class="archive-status__stamp">{stamp}</span>
+    </header>
+
+    <div class="archive-status__body">
+      <div class="archive-status__signal" aria-hidden="true">
+        <span class="archive-status__orbit"></span>
+        <strong>{code.match(/\d+/)?.[0] ?? "—"}</strong>
+      </div>
+
+      <div class="archive-status__copy">
+        <p class="archive-status__eyebrow">{eyebrow}</p>
+        <h1 id="archive-status-title">{title}</h1>
+        <p class="archive-status__description">{description}</p>
+
+        <dl class="archive-status__details">
+          <div>
+            <dt>СТАТУС</dt>
+            <dd>{status}</dd>
+          </div>
+          <div>
+            <dt>ПРОТОКОЛ</dt>
+            <dd>RETURN / CONTACT</dd>
+          </div>
+        </dl>
+
+        <nav class="archive-status__actions" aria-label="Действия страницы">
+          <a class="archive-status__primary" href={primaryAction.href}>
+            <span>{primaryAction.label}</span>
+            <span class="archive-status__action-icon">
+              <TechnicalIcon name="arrow" />
+            </span>
+          </a>
+          <a class="archive-status__secondary" href={secondaryAction.href}>
+            {secondaryAction.label}
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <footer class="archive-status__footer">
+      <span>АРХИВ №404</span>
+      <span>БЮРО ЦИФРОВЫХ КОНСТРУКЦИЙ</span>
+    </footer>
+  </article>
+</section>
+
+<style is:inline>
+  .archive-status {
+    min-height: calc(100vh - 6.5rem);
+    padding: clamp(1.5rem, 5vw, 5.5rem) var(--content-pad);
+    background-image:
+      linear-gradient(var(--rule-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px);
+    background-size: 3.25rem 3.25rem;
+  }
+
+  .archive-status__telemetry,
+  .archive-status__header,
+  .archive-status__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--font-condensed);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .archive-status__telemetry {
+    max-width: 68rem;
+    margin: 0 auto 0.75rem;
+    color: var(--graphite-soft);
+  }
+
+  .archive-status__record {
+    position: relative;
+    max-width: 68rem;
+    margin-inline: auto;
+    background: rgba(242, 236, 223, 0.94);
+    border: 1px solid var(--rule);
+    box-shadow: 0.32rem 0.38rem 0 var(--shadow);
+    clip-path: polygon(0 0, calc(100% - 2.4rem) 0, 100% 2.4rem, 100% 100%, 0 100%);
+  }
+
+  .archive-status__header,
+  .archive-status__footer {
+    min-height: 3.25rem;
+    padding: 0.65rem 1.15rem;
+  }
+
+  .archive-status__header {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .archive-status__header p {
+    color: var(--teal);
+    font-size: 0.75rem;
+  }
+
+  .archive-status__stamp {
+    padding: 0.2rem 0.55rem;
+    color: var(--red);
+    border: 2px solid currentColor;
+    font-size: 0.78rem;
+    transform: rotate(2deg);
+  }
+
+  .archive-status__body {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1.3fr);
+    min-height: 28rem;
+  }
+
+  .archive-status__signal {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 24rem;
+    overflow: hidden;
+    color: var(--teal);
+    border-right: 1px solid var(--rule);
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 0.7rem,
+      rgba(11, 112, 120, 0.07) 0.7rem 0.76rem
+    );
+  }
+
+  .archive-status__signal::before,
+  .archive-status__signal::after {
+    position: absolute;
+    background: currentColor;
+    content: "";
+    opacity: 0.55;
+  }
+
+  .archive-status__signal::before {
+    width: 80%;
+    height: 1px;
+  }
+
+  .archive-status__signal::after {
+    width: 1px;
+    height: 80%;
+  }
+
+  .archive-status__signal strong {
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 8rem;
+    height: 8rem;
+    background: var(--paper);
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 3.8rem;
+    letter-spacing: 0.03em;
+  }
+
+  .archive-status__orbit {
+    position: absolute;
+    width: 12rem;
+    height: 12rem;
+    border: 1px dashed currentColor;
+    border-radius: 50%;
+    transform: rotate(-10deg);
+  }
+
+  .archive-status__copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 4vw, 4rem);
+  }
+
+  .archive-status__eyebrow {
+    color: var(--orange);
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+  }
+
+  .archive-status h1 {
+    max-width: 11ch;
+    margin-top: 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-stretch: condensed;
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: -0.035em;
+  }
+
+  .archive-status__description {
+    max-width: 35rem;
+    margin-top: 1.4rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .archive-status__details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.5rem;
+    border-block: 1px solid var(--rule-soft);
+  }
+
+  .archive-status__details div {
+    padding: 0.8rem 0;
+  }
+
+  .archive-status__details div + div {
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule-soft);
+  }
+
+  .archive-status__details dt,
+  .archive-status__details dd {
+    font-family: var(--font-condensed);
+  }
+
+  .archive-status__details dt {
+    color: var(--graphite-soft);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .archive-status__details dd {
+    margin-top: 0.28rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .archive-status__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .archive-status__primary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.8rem;
+    align-items: center;
+    min-width: min(18rem, 100%);
+    min-height: 3.15rem;
+    padding-left: 1.25rem;
+    color: var(--paper);
+    background: var(--orange);
+    border: 1px solid var(--orange-dark);
+    box-shadow: 0.16rem 0.19rem 0 var(--shadow);
+    font-family: var(--font-condensed);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+  }
+
+  .archive-status__primary:hover,
+  .archive-status__primary:focus-visible {
+    color: var(--orange);
+    background: var(--paper);
+    transform: translate(-0.12rem, -0.12rem);
+  }
+
+  .archive-status__action-icon {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    justify-self: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+  }
+
+  .archive-status__action-icon .technical-icon {
+    width: 1.05rem;
+  }
+
+  .archive-status__secondary {
+    color: var(--teal);
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-underline-offset: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .archive-status__footer {
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 58rem) {
+    .archive-status__body {
+      grid-template-columns: 1fr;
+    }
+
+    .archive-status__signal {
+      min-height: 14rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .archive-status__signal strong {
+      width: 6rem;
+      height: 6rem;
+      font-size: 2.8rem;
+    }
+
+    .archive-status__orbit {
+      width: 9rem;
+      height: 9rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .archive-status {
+      padding: 1rem;
+      background-size: 2.5rem 2.5rem;
+    }
+
+    .archive-status__telemetry span:last-child,
+    .archive-status__footer span:last-child {
+      display: none;
+    }
+
+    .archive-status__record {
+      clip-path: none;
+    }
+
+    .archive-status__copy {
+      padding: 1.6rem 1.15rem 2rem;
+    }
+
+    .archive-status h1 {
+      font-size: clamp(3rem, 17vw, 4.5rem);
+    }
+
+    .archive-status__details,
+    .archive-status__actions {
+      grid-template-columns: 1fr;
+    }
+
+    .archive-status__details div + div {
+      padding-left: 0;
+      border-top: 1px solid var(--rule-soft);
+      border-left: 0;
+    }
+
+    .archive-status__actions {
+      display: grid;
+      align-items: stretch;
+    }
+
+    .archive-status__primary {
+      width: 100%;
+    }
+  }
+</style>

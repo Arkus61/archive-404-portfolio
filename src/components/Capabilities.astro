@@ -1,0 +1,54 @@
+---
+interface Props {
+  services: string[];
+  technologies: string[];
+}
+
+const { services, technologies } = Astro.props;
+---
+
+<div class="capabilities-grid">
+  <section id="services" class="capability-panel ruled-section" aria-labelledby="services-title">
+    <header class="section-heading section-heading--compact">
+      <span class="section-heading__marker section-heading__marker--orange" aria-hidden="true"></span>
+      <div>
+        <p class="section-heading__index">02 / ПРАКТИКА</p>
+        <h2 id="services-title">УСЛУГИ</h2>
+      </div>
+    </header>
+    <ol class="capability-list">
+      {
+        services.map((service, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{service}</strong>
+            <i aria-hidden="true"></i>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section id="technologies" class="capability-panel ruled-section" aria-labelledby="technologies-title">
+    <header class="section-heading section-heading--compact">
+      <span class="section-heading__marker section-heading__marker--teal" aria-hidden="true"></span>
+      <div>
+        <p class="section-heading__index">03 / СТЕК</p>
+        <h2 id="technologies-title">НАВЫКИ И ТЕХНОЛОГИИ</h2>
+      </div>
+    </header>
+    <ul class="technology-list">
+      {
+        technologies.map((technology, index) => (
+          <li>
+            <span class="technology-list__glyph" aria-hidden="true">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+            </span>
+            <strong>{technology}</strong>
+            <span>CORE STACK</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</div>

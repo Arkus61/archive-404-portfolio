@@ -1,0 +1,60 @@
+---
+import Header from "../components/Header.astro";
+import TechnicalRails from "../components/TechnicalRails.astro";
+import { baseUrl } from "../lib/urls";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  systemStatus?: string;
+  systemState?: "normal" | "warning";
+}
+
+const {
+  title,
+  description,
+  noindex = false,
+  systemStatus,
+  systemState,
+} = Astro.props;
+const canonicalUrl = new URL(
+  Astro.url.pathname,
+  Astro.site ?? Astro.url.origin,
+).href;
+const homeNavigation = Astro.url.pathname === baseUrl;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#f1ecdf" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+    <div class="page-shell">
+      <TechnicalRails side="left" />
+      <div class="page-canvas">
+        <Header {homeNavigation} {systemStatus} {systemState} />
+        <main id="main-content" tabindex="-1">
+          <slot />
+        </main>
+      </div>
+      <TechnicalRails side="right" />
+    </div>
+  </body>
+</html>

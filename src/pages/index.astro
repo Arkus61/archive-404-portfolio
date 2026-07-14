@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+
+import AboutContact from "../components/AboutContact.astro";
+import Capabilities from "../components/Capabilities.astro";
+import Hero from "../components/Hero.astro";
+import Process from "../components/Process.astro";
+import ProjectArchive from "../components/ProjectArchive.astro";
+import { getContactLinks, siteData } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sortProjects } from "../lib/projects";
+
+const projectEntries = await getCollection("projects");
+const projects = sortProjects(projectEntries.map(({ data }) => data));
+const contactLinks = getContactLinks(siteData);
+---
+
+<BaseLayout title={siteData.seo.title} description={siteData.seo.description}>
+  <Hero
+    description={siteData.description}
+    primaryCta={siteData.cta.primary}
+    secondaryCta={siteData.cta.secondary}
+    role={siteData.role}
+  />
+  <ProjectArchive {projects} />
+  <Capabilities services={siteData.services} technologies={siteData.technologies} />
+  <Process />
+  <AboutContact
+    name={siteData.name}
+    role={siteData.role}
+    description={siteData.description}
+    {contactLinks}
+  />
+</BaseLayout>

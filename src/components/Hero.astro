@@ -1,0 +1,37 @@
+---
+import SpecialistDossier from "./SpecialistDossier.astro";
+import TechnicalIcon from "./icons/TechnicalIcon.astro";
+
+interface Props {
+  description: string;
+  primaryCta: string;
+  secondaryCta: string;
+  role: string;
+}
+
+const { description, primaryCta, secondaryCta, role } = Astro.props;
+---
+
+<section id="hero" class="hero" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <h1 id="hero-title" class="hero__title">АРХИВ №404</h1>
+    <p class="hero__bureau">БЮРО ЦИФРОВЫХ КОНСТРУКЦИЙ</p>
+    <div class="hero__rule" aria-hidden="true"><span></span></div>
+    <h2 class="hero__service">САЙТЫ ПОД КЛЮЧ</h2>
+    <p class="hero__description">{description}</p>
+    <a class="primary-cta" href="#contact">
+      <span>{primaryCta}</span>
+      <span class="primary-cta__icon"><TechnicalIcon name="arrow" /></span>
+    </a>
+    <a class="secondary-cta" href="#projects">
+      <span>{secondaryCta}</span>
+      <TechnicalIcon name="arrow" />
+    </a>
+    <div class="hero__marker" aria-hidden="true">
+      <span class="crosshair crosshair--animated"></span>
+      <strong>404</strong>
+    </div>
+  </div>
+
+  <SpecialistDossier {role} />
+</section>

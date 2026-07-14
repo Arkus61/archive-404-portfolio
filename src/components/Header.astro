@@ -1,0 +1,68 @@
+---
+import { homeUrl } from "../lib/urls";
+
+interface Props {
+  homeNavigation?: boolean;
+  systemStatus?: string;
+  systemState?: "normal" | "warning";
+}
+
+const {
+  homeNavigation = false,
+  systemStatus = "СИСТЕМА: НОРМА",
+  systemState = "normal",
+} = Astro.props;
+
+const navItems = [
+  { fragment: "about", label: "ОБО МНЕ" },
+  { fragment: "services", label: "УСЛУГИ" },
+  { fragment: "projects", label: "ПРОЕКТЫ" },
+  { fragment: "process", label: "ПРОЦЕСС" },
+  { fragment: "technologies", label: "ТЕХНОЛОГИИ" },
+  { fragment: "contact", label: "КОНТАКТЫ" },
+] as const;
+
+const fragmentUrl = (fragment: string) =>
+  homeNavigation ? `#${fragment}` : homeUrl(fragment);
+---
+
+<header class="site-header">
+  <a class="archive-mark" href={fragmentUrl("hero")} aria-label="Архив №404 — в начало">
+    <span class="archive-mark__title">АРХИВ №404</span>
+    <span class="archive-mark__subtitle">БЮРО ЦИФРОВЫХ КОНСТРУКЦИЙ</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Основная навигация">
+    <ul>
+      {
+        navItems.map((item) => (
+          <li><a href={fragmentUrl(item.fragment)}>{item.label}</a></li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <p class="system-state" aria-label={systemStatus}>
+    <span
+      class:list={[
+        "system-state__dot",
+        systemState === "warning" && "system-state__dot--warning",
+      ]}
+      aria-hidden="true"
+    ></span>
+    <span class="system-state__text">{systemStatus}</span>
+  </p>
+
+  <details class="mobile-nav">
+    <summary>МЕНЮ <span aria-hidden="true">＋</span></summary>
+    <nav aria-label="Мобильная навигация">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li><a href={fragmentUrl(item.fragment)}>{item.label}</a></li>
+          ))
+        }
+      </ul>
+    </nav>
+  </details>
+</header>

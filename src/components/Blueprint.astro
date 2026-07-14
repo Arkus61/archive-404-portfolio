@@ -1,0 +1,76 @@
+<svg
+  class="blueprint"
+  viewBox="0 0 620 330"
+  role="img"
+  aria-labelledby="blueprint-title blueprint-description"
+>
+  <title id="blueprint-title">Технический чертёж веб-системы</title>
+  <desc id="blueprint-description">
+    Схема статического сайта: интерфейс, типизированные данные и сборка связаны в единую систему.
+  </desc>
+  <defs>
+    <pattern id="minor-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M10 0H0V10" class="blueprint__grid blueprint__grid--minor" />
+    </pattern>
+    <pattern id="major-grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect width="50" height="50" fill="url(#minor-grid)" />
+      <path d="M50 0H0V50" class="blueprint__grid blueprint__grid--major" />
+    </pattern>
+    <marker id="dimension-arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path d="M7 3.5 0 0v7Z" class="blueprint__arrow" />
+    </marker>
+  </defs>
+
+  <rect width="620" height="330" fill="url(#major-grid)" />
+
+  <g class="blueprint__ink">
+    <path d="M24 36h52M50 10v52M544 36h52M570 10v52M24 294h52M50 268v52M544 294h52M570 268v52" class="blueprint__cross" />
+
+    <path d="M118 80H88v170h30M502 80h30v170h-30" />
+    <path d="M103 164h55M462 164h55" />
+    <circle cx="88" cy="164" r="5" />
+    <circle cx="532" cy="164" r="5" />
+
+    <g class="blueprint__browser">
+      <rect x="158" y="58" width="304" height="212" rx="2" />
+      <path d="M158 89h304" />
+      <circle cx="176" cy="73.5" r="3" />
+      <circle cx="188" cy="73.5" r="3" />
+      <circle cx="200" cy="73.5" r="3" />
+      <path d="M219 73.5h212" />
+      <rect x="181" y="112" width="126" height="94" />
+      <path d="M198 130h91M198 146h76M198 162h91M198 186h52" />
+      <rect x="327" y="112" width="112" height="38" />
+      <rect x="327" y="168" width="51" height="38" />
+      <rect x="388" y="168" width="51" height="38" />
+      <path d="M181 228h258" />
+      <circle cx="232" cy="228" r="10" />
+      <circle cx="310" cy="228" r="10" />
+      <circle cx="388" cy="228" r="10" />
+      <path d="M242 228h58M320 228h58" />
+    </g>
+
+    <g class="blueprint__nodes">
+      <rect x="52" y="112" width="72" height="36" />
+      <rect x="52" y="180" width="72" height="36" />
+      <path d="M124 130h34M124 198h34M141 130v68" />
+      <rect x="496" y="112" width="72" height="36" />
+      <rect x="496" y="180" width="72" height="36" />
+      <path d="M462 130h34M462 198h34M479 130v68" />
+    </g>
+
+    <path d="M158 286h304" class="blueprint__dimension" marker-start="url(#dimension-arrow)" marker-end="url(#dimension-arrow)" />
+    <path d="M482 58v212" class="blueprint__dimension" marker-start="url(#dimension-arrow)" marker-end="url(#dimension-arrow)" />
+
+    <text x="300" y="305">620 / RESPONSIVE FRAME</text>
+    <text x="498" y="280">330</text>
+    <text x="67" y="135">DATA</text>
+    <text x="72" y="203">CMS</text>
+    <text x="513" y="135">BUILD</text>
+    <text x="508" y="203">STATIC</text>
+    <text x="286" y="48">A–A / WEB SYSTEM</text>
+    <text x="206" y="252">IDEA</text>
+    <text x="287" y="252">CODE</text>
+    <text x="362" y="252">LAUNCH</text>
+  </g>
+</svg>

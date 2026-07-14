@@ -1,0 +1,25 @@
+---
+import ArchiveStatusPage from "../../components/ArchiveStatusPage.astro";
+import { siteData } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { homeUrl } from "../../lib/urls";
+---
+
+<BaseLayout
+  title={`Техническое обслуживание — ${siteData.seo.title}`}
+  description="Архив временно недоступен из-за технического обслуживания."
+  noindex
+  systemStatus="СИСТЕМА: ОБСЛУЖИВАНИЕ"
+  systemState="warning"
+>
+  <ArchiveStatusPage
+    code="SERVICE / PAUSE"
+    eyebrow="ТЕХНИЧЕСКОЕ ОБСЛУЖИВАНИЕ"
+    title="АРХИВ ВРЕМЕННО НЕДОСТУПЕН"
+    description="Проводится регламентная проверка системы хранения. После завершения работ доступ к архиву будет восстановлен."
+    status="СИСТЕМА: ОБСЛУЖИВАНИЕ"
+    stamp="MAINTENANCE"
+    primaryAction={{ href: homeUrl(), label: "Вернуться в архив" }}
+    secondaryAction={{ href: homeUrl("contact"), label: "Связаться" }}
+  />
+</BaseLayout>

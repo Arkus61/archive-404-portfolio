@@ -1,0 +1,97 @@
+---
+import { Picture } from "astro:assets";
+
+import type { Project } from "../lib/projects";
+import TechnicalIcon from "./icons/TechnicalIcon.astro";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+
+function projectImageAlt(project: Project): string {
+  return project.imageAlt ?? `Превью проекта «${project.title}»`;
+}
+---
+
+<section id="projects" class="archive-section ruled-section" aria-labelledby="projects-title">
+  <header class="section-heading">
+    <span class="section-heading__marker section-heading__marker--orange" aria-hidden="true"></span>
+    <div>
+      <p class="section-heading__index">01 / АРХИВ</p>
+      <h2 id="projects-title">АРХИВ МИССИЙ</h2>
+    </div>
+    <p class="section-heading__note">ПРОЕКТЫ</p>
+  </header>
+
+  <div class="project-list">
+    {
+      projects.map((project, index) => (
+        <article class="project-record" data-project-id={project.id}>
+          <header class="project-record__header">
+            <span class="mission-label">МИССИЯ {String(index + 1).padStart(3, "0")}</span>
+            <span>A404–{String(index + 1).padStart(3, "0")}</span>
+          </header>
+
+          <div class="project-record__summary">
+            <div>
+              <p class="project-record__category">{project.category}</p>
+              <h3>{project.title}</h3>
+            </div>
+            <p>{project.summary}</p>
+            {
+              project.image && typeof project.image !== "string" && (
+                <figure class="project-record__visual">
+                  <Picture
+                    src={project.image}
+                    alt={projectImageAlt(project)}
+                    formats={["avif"]}
+                    fallbackFormat="webp"
+                    widths={[480, 720, 960]}
+                    sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc(100vw - 8rem), 1160px"
+                    loading="lazy"
+                    decoding="async"
+                    pictureAttributes={{ class: "project-record__picture" }}
+                  />
+                </figure>
+              )
+            }
+          </div>
+
+          <div class="project-record__tags" aria-label="Тип клиента и технологии">
+            <span>{project.clientType}</span>
+            {project.stack.map((technology) => <span>{technology}</span>)}
+          </div>
+
+          <details class="project-record__details">
+            <summary>
+              <span>ОТКРЫТЬ АРХИВНУЮ ЗАПИСЬ</span>
+              <TechnicalIcon name="arrow" />
+            </summary>
+            <dl>
+              <div>
+                <dt>ЗАДАЧА</dt>
+                <dd>{project.task}</dd>
+              </div>
+              <div>
+                <dt>РЕШЕНИЕ</dt>
+                <dd>{project.solution}</dd>
+              </div>
+              <div>
+                <dt>РЕЗУЛЬТАТ</dt>
+                <dd>{project.result}</dd>
+              </div>
+            </dl>
+          </details>
+
+          <footer class="project-record__footer">
+            <span>ГОД / {project.year}</span>
+            <strong class="project-status"><i aria-hidden="true"></i>{project.status}</strong>
+            <TechnicalIcon name="globe" />
+          </footer>
+        </article>
+      ))
+    }
+  </div>
+</section>
