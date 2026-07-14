@@ -186,16 +186,32 @@ describe("generated home page", () => {
     expect(visibleText(project ?? "")).toContain("В разработке");
   });
 
-  test("does not invent contact hrefs when contact data is null", () => {
+  test("renders only validated contact hrefs", () => {
     const archivedContact = pageHtml.match(
       /<div\b(?=[^>]*\bclass="[^"]*contact-archived\b[^"]*")[^>]*>/,
     )?.[0];
 
-    expect(siteData.email).toBeNull();
-    expect(siteData.telegram).toBeNull();
-    expect(archivedContact).toBeDefined();
-    expect(archivedContact).not.toMatch(/\brole=/);
-    expect(pageHtml).not.toContain('href="mailto:');
-    expect(pageHtml).not.toContain('href="https://t.me/');
+    if (siteData.email) {
+      expect(pageHtml).toContain(
+        `href="mailto:${encodeURIComponent(siteData.email)}"`,
+      );
+    } else {
+      expect(pageHtml).not.toContain('href="mailto:');
+    }
+
+    if (siteData.telegram) {
+      expect(pageHtml).toContain(
+        `href="https://t.me/${encodeURIComponent(siteData.telegram)}"`,
+      );
+    } else {
+      expect(pageHtml).not.toContain('href="https://t.me/');
+    }
+
+    if (siteData.email || siteData.telegram) {
+      expect(archivedContact).toBeUndefined();
+    } else {
+      expect(archivedContact).toBeDefined();
+      expect(archivedContact).not.toMatch(/\brole=/);
+    }
   });
 });

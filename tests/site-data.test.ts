@@ -41,11 +41,9 @@ describe("site data", () => {
   });
 
   test("omits absent contacts instead of rendering unsafe empty links", async () => {
-    const { getContactLinks, siteData } = await loadSiteModule();
+    const { getContactLinks } = await loadSiteModule();
 
-    expect(siteData.email).toBeNull();
-    expect(siteData.telegram).toBeNull();
-    expect(getContactLinks(siteData)).toEqual([]);
+    expect(getContactLinks({ email: null, telegram: null })).toEqual([]);
     expect(getContactLinks({ email: "", telegram: "   " })).toEqual([]);
   });
 
@@ -53,7 +51,11 @@ describe("site data", () => {
     const { getContactLinks, siteData, siteDataSchema } = await loadSiteModule();
 
     for (const telegram of ["example_user", "@example_user"]) {
-      const parsed = siteDataSchema.parse({ ...siteData, telegram });
+      const parsed = siteDataSchema.parse({
+        ...siteData,
+        email: null,
+        telegram,
+      });
 
       expect(parsed.telegram).toBe("example_user");
       expect(getContactLinks(parsed)).toEqual([
